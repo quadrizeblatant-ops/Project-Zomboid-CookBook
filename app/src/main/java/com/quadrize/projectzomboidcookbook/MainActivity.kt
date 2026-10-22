@@ -9,6 +9,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -55,7 +56,7 @@ fun AppHeader() {
             modifier = Modifier.padding(start = 18.dp)
         )
         Text(
-            style = MaterialTheme.typography.headlineMedium,
+            style = MaterialTheme.typography.headlineSmall,
             text = "More than 100 recipes of various food",
             modifier = Modifier.padding(top = 12.dp)
         )
@@ -67,6 +68,7 @@ fun AppHeader() {
 fun StartButton(onClick: () -> Unit) {
     Button(
         modifier = Modifier
+            .height(78.dp)
             .padding(horizontal = 16.dp)
             .padding(top = 16.dp)
             .fillMaxWidth(),
@@ -85,7 +87,7 @@ fun StartButton(onClick: () -> Unit) {
 fun StartBackgroundImage() {
     Image(
         contentDescription = ",",
-        painter = painterResource(R.drawable.spiffo),
+        painter = painterResource(R.drawable.spiffo_background),
         modifier = Modifier
             .size(640.dp)
     )
