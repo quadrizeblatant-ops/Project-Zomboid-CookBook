@@ -43,10 +43,17 @@ fun HomeScreen() {
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            Text("Coming soon",
-                modifier = Modifier.padding(20.dp),
-                style = MaterialTheme.typography.headlineLarge)
-
+            HomeScreenHeader()
         }
     }
+}
+
+
+@Composable
+fun HomeScreenHeader() {
+    Text(
+        "Coming soon",
+        modifier = Modifier.padding(20.dp),
+        style = MaterialTheme.typography.headlineLarge
+    )
 }
