@@ -57,7 +57,7 @@ fun AppHeader() {
         )
         Text(
             style = MaterialTheme.typography.headlineSmall,
-            text = "More than 100 recipes of various food",
+            text = "Lots of various recipes collected here",
             modifier = Modifier.padding(top = 12.dp)
         )
 
