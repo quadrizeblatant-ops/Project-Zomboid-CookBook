@@ -14,9 +14,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.Button
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -48,6 +52,7 @@ fun HomeScreen() {
                 .padding(innerPadding)
         ) {
             SearchBar()
+            Categories()
 
         }
     }
@@ -68,20 +73,73 @@ fun SearchBar() {
             color = MaterialTheme.colorScheme.onBackground
         )
         OutlinedTextField(
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = Color(0xFF292D28),
-                    unfocusedContainerColor = Color(0xFF292D28)
-                ),
-        shape = RoundedCornerShape(12.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 12.dp)
-            ,
-        value = searchText,
-        onValueChange = { searchText = it },
-        placeholder = {
-            Text("Search here...")
-        }
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = Color(0xFF292D28),
+                unfocusedContainerColor = Color(0xFF292D28),
+                focusedBorderColor = Color(0xFF667A4E),
+                unfocusedBorderColor = Color(0xFF667A4E)
+            ),
+            shape = RoundedCornerShape(12.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 12.dp),
+            value = searchText,
+            onValueChange = { searchText = it },
+            placeholder = {
+                Text(
+                    text = "Search here...",
+                    style = MaterialTheme.typography.headlineSmall
+                )
+            }
         )
+    }
+}
+
+@Composable
+fun Categories(modifier: Modifier = Modifier) {
+    val categories = listOf(
+        "New",
+        "Popular",
+        "Easy to make",
+        "Complicated",
+        "Low level"
+    )
+
+    var selectedCategory by remember {
+        mutableStateOf("New")
+    }
+
+    LazyRow(
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        modifier = Modifier
+            .padding(12.dp)
+    ) {
+        items(categories) { category ->
+            FilterChip(
+                selected = selectedCategory == category,
+                onClick = {
+                    selectedCategory = category
+                },
+                label = {
+                    Text(
+                        text = category,
+                        style = MaterialTheme.typography.headlineSmall
+                    )
+                },
+                shape = RoundedCornerShape(12.dp),
+                colors = FilterChipDefaults.filterChipColors(
+                    selectedContainerColor = Color(0xFF667A4E),
+                    selectedLabelColor = Color.White,
+                    containerColor = Color(0xFF292D28),
+                    labelColor = Color(0xFFD5D0B8)
+                ),
+                border = FilterChipDefaults.filterChipBorder(
+                    enabled = true,
+                    selected = selectedCategory == category,
+                    borderColor = Color(0xFF667A4E),
+                    selectedBorderColor = Color(0xFF667A4E)
+                )
+            )
+        }
     }
 }

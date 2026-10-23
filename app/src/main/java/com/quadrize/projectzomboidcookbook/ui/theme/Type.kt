@@ -42,7 +42,7 @@ val Typography = Typography(
         )
     ),
     headlineSmall = TextStyle(
-        fontSize = 22.sp,
+        fontSize = 18.sp,
         fontFamily = FontFamily(
             Font(
                 resId = R.font.montserrat_font,
