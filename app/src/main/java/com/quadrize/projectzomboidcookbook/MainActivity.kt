@@ -67,6 +67,7 @@ fun AppHeader() {
         Text(
             style = MaterialTheme.typography.headlineLarge,
             text = "Tired of searching for recipe?",
+            color = MaterialTheme.colorScheme.onBackground
         )
         Spacer(
             modifier = Modifier.height(12.dp)
@@ -74,6 +75,7 @@ fun AppHeader() {
         Text(
             style = MaterialTheme.typography.headlineSmall,
             text = "Lots of various recipes collected here",
+            color = MaterialTheme.colorScheme.onBackground
         )
 
     }

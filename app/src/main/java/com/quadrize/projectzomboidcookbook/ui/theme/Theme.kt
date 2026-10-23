@@ -21,7 +21,8 @@ private val DarkColorScheme = darkColorScheme(
 
     background = Color(0xFF000000),
     surface = Color(0xFF000000),
-    onBackground = mainTitleColorDark,
+    onBackground = TextPrimary,
+    onSurface = TextPrimary
 )
 
 private val LightColorScheme = lightColorScheme(

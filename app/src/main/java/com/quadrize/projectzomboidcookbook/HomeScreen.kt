@@ -15,8 +15,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,6 +35,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.quadrize.projectzomboidcookbook.AppNavigation
+import androidx.compose.runtime.*
 import com.quadrize.projectzomboidcookbook.ui.theme.ProjectZomboidCookBookTheme
 
 @Composable
@@ -43,17 +47,41 @@ fun HomeScreen() {
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            HomeScreenHeader()
+            SearchBar()
+
         }
     }
 }
 
 
 @Composable
-fun HomeScreenHeader() {
-    Text(
-        "Coming soon",
-        modifier = Modifier.padding(20.dp),
-        style = MaterialTheme.typography.headlineLarge
-    )
+fun SearchBar() {
+    var searchText by remember { mutableStateOf("") }
+    Column(
+        horizontalAlignment = Alignment.Start
+    ) {
+        Text(
+            modifier = Modifier
+                .padding(12.dp),
+            text = "Looking for something?",
+            style = MaterialTheme.typography.headlineMedium,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+        OutlinedTextField(
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedContainerColor = Color(0xFF292D28),
+                    unfocusedContainerColor = Color(0xFF292D28)
+                ),
+        shape = RoundedCornerShape(12.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 12.dp)
+            ,
+        value = searchText,
+        onValueChange = { searchText = it },
+        placeholder = {
+            Text("Search here...")
+        }
+        )
+    }
 }
