@@ -15,6 +15,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.input.TextFieldState
@@ -40,6 +43,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.quadrize.projectzomboidcookbook.AppNavigation
 import androidx.compose.runtime.*
+import com.quadrize.projectzomboidcookbook.Recipe
+import com.quadrize.projectzomboidcookbook.recipes
 import com.quadrize.projectzomboidcookbook.ui.theme.ProjectZomboidCookBookTheme
 
 @Composable
@@ -53,6 +58,10 @@ fun HomeScreen() {
         ) {
             SearchBar()
             Categories()
+            RecipeGrid(modifier = Modifier
+                .weight(1f)
+                .padding(horizontal = 16.dp)
+            )
 
         }
     }
@@ -92,6 +101,20 @@ fun SearchBar() {
                 )
             }
         )
+    }
+}
+
+@Composable
+fun TestFilterChip() {
+    val testCategories = listOf(
+        "Test 1",
+        "Test 2",
+        "Test 3"
+    )
+    val selectedCategory by remember {
+        mutableStateOf("Test 1")
+    }
+    LazyRow() {
     }
 }
 
@@ -141,5 +164,35 @@ fun Categories(modifier: Modifier = Modifier) {
                 )
             )
         }
+    }
+}
+
+@Composable
+fun RecipeGrid(modifier: Modifier = Modifier) {
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        modifier = modifier,
+    ) {
+        items(recipes) { recipe ->
+            RecipeCard(recipe)
+        }
+    }
+}
+
+@Composable
+fun RecipeCard(recipe: Recipe) {
+    Column() {
+        Text(
+            text = recipe.name,
+            style = MaterialTheme.typography.headlineSmall
+        )
+        Text(
+            text = recipe.difficulty,
+            style = MaterialTheme.typography.headlineSmall
+        )
+        Text(
+            text = recipe.cookingTime.toString(),
+            style = MaterialTheme.typography.headlineSmall
+        )
     }
 }
