@@ -1,18 +1,23 @@
 package com.quadrize.projectzomboidcookbook.ui
 
+import android.R
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -22,6 +27,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.MaterialTheme
@@ -58,9 +66,10 @@ fun HomeScreen() {
         ) {
             SearchBar()
             Categories()
-            RecipeGrid(modifier = Modifier
-                .weight(1f)
-                .padding(horizontal = 16.dp)
+            RecipeGrid(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = 16.dp)
             )
 
         }
@@ -181,18 +190,43 @@ fun RecipeGrid(modifier: Modifier = Modifier) {
 
 @Composable
 fun RecipeCard(recipe: Recipe) {
-    Column() {
-        Text(
-            text = recipe.name,
-            style = MaterialTheme.typography.headlineSmall
+    Card(
+        modifier = Modifier
+            .padding(6.dp),
+        shape = RoundedCornerShape(6.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color(0xFF292D28)
+        ),
+        border = BorderStroke(2.dp, color = Color(0xFF667A4E))
+
+    ) {
+        Spacer(
+            modifier = Modifier.height(140.dp)
         )
-        Text(
-            text = recipe.difficulty,
-            style = MaterialTheme.typography.headlineSmall
-        )
-        Text(
-            text = recipe.cookingTime.toString(),
-            style = MaterialTheme.typography.headlineSmall
-        )
+        Column(
+            modifier = Modifier
+                .padding(8.dp)
+        ) {
+            Text(
+
+                text = recipe.name,
+                style = MaterialTheme.typography.headlineSmall
+            )
+            Text(
+                text = recipe.difficulty,
+                style = MaterialTheme.typography.headlineSmall
+            )
+            Text(
+                text = recipe.cookingTime.toString() + " мин.",
+                style = MaterialTheme.typography.headlineSmall
+            )
+        }
+
     }
+}
+
+@Preview
+@Composable
+private fun RecipeCardPrev() {
+    RecipeGrid()
 }
