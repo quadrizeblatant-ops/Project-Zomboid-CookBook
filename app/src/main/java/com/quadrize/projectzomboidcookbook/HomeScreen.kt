@@ -56,12 +56,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.LineHeightStyle
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.quadrize.projectzomboidcookbook.Recipe
+import com.quadrize.projectzomboidcookbook.RecipeViewModel
 import com.quadrize.projectzomboidcookbook.recipes
 import com.quadrize.projectzomboidcookbook.ui.theme.ProjectZomboidCookBookTheme
 
 @Composable
 fun HomeScreen() {
+    val viewModel: RecipeViewModel = viewModel()
+    val searchText by viewModel.searchText.collectAsStateWithLifecycle()
+    val selectedCategory by viewModel.selectedCategory.collectAsStateWithLifecycle()
+
     AppBackground {
         Scaffold(
             containerColor = Color.Transparent
@@ -72,8 +79,14 @@ fun HomeScreen() {
                     .fillMaxSize()
                     .padding(innerPadding)
             ) {
-                SearchBar()
-                Categories()
+                SearchBar(
+                    searchText = searchText,
+                    onSearchTextChange = viewModel::onSearchTextChange
+                )
+                Categories(
+                    selectedCategory = selectedCategory,
+                    onCategoryChange = viewModel::onCategoryChange
+                )
                 RecipeGrid()
             }
         }
@@ -82,8 +95,10 @@ fun HomeScreen() {
 
 
 @Composable
-fun SearchBar() {
-    var searchText by remember { mutableStateOf("") }
+fun SearchBar(
+    searchText: String,
+    onSearchTextChange: (String) -> Unit
+) {
     Column(
         horizontalAlignment = Alignment.Start
     ) {
@@ -106,7 +121,7 @@ fun SearchBar() {
                 .fillMaxWidth()
                 .padding(horizontal = 12.dp),
             value = searchText,
-            onValueChange = { searchText = it },
+            onValueChange = { onSearchTextChange(it) },
             placeholder = {
                 Text(
                     text = "Search here...",
@@ -132,7 +147,10 @@ fun TestFilterChip() {
 }
 
 @Composable
-fun Categories() {
+fun Categories(
+    selectedCategory: String,
+    onCategoryChange: (String) -> Unit
+) {
     val categories = listOf(
         "New",
         "Popular",
@@ -140,9 +158,6 @@ fun Categories() {
         "Complicated",
         "Low level"
     )
-    var selectedCategory by remember {
-        mutableStateOf("New")
-    }
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         modifier = Modifier
@@ -152,9 +167,8 @@ fun Categories() {
             FilterChip(
                 selected = selectedCategory == category,
                 onClick = {
-                    selectedCategory = category
-                    if (selectedCategory == "Easy to make") {
-
+                    onCategoryChange(category)
+                    if (category == "Easy to Make") {
                     }
                 },
                 label = {
@@ -234,7 +248,6 @@ fun RecipeCard(recipe: Recipe) {
         }
     }
 }
-
 
 
 @Preview
