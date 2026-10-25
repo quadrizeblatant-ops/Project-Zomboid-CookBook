@@ -1,6 +1,6 @@
 package com.quadrize.projectzomboidcookbook.ui
 
-import android.R
+import com.quadrize.projectzomboidcookbook.R
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,7 +10,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -38,7 +40,6 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Color
@@ -51,27 +52,30 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.quadrize.projectzomboidcookbook.AppNavigation
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.style.LineHeightStyle
 import com.quadrize.projectzomboidcookbook.Recipe
 import com.quadrize.projectzomboidcookbook.recipes
 import com.quadrize.projectzomboidcookbook.ui.theme.ProjectZomboidCookBookTheme
 
 @Composable
 fun HomeScreen() {
-    Scaffold { innerPadding ->
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-        ) {
-            SearchBar()
-            Categories()
-            RecipeGrid(
+    AppBackground {
+        Scaffold(
+            containerColor = Color.Transparent
+        ) { innerPadding ->
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
-                    .weight(1f)
-                    .padding(horizontal = 16.dp)
-            )
-
+                    .fillMaxSize()
+                    .padding(innerPadding)
+            ) {
+                SearchBar()
+                Categories()
+                RecipeGrid()
+            }
         }
     }
 }
@@ -128,7 +132,7 @@ fun TestFilterChip() {
 }
 
 @Composable
-fun Categories(modifier: Modifier = Modifier) {
+fun Categories() {
     val categories = listOf(
         "New",
         "Popular",
@@ -136,11 +140,9 @@ fun Categories(modifier: Modifier = Modifier) {
         "Complicated",
         "Low level"
     )
-
     var selectedCategory by remember {
         mutableStateOf("New")
     }
-
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         modifier = Modifier
@@ -151,6 +153,9 @@ fun Categories(modifier: Modifier = Modifier) {
                 selected = selectedCategory == category,
                 onClick = {
                     selectedCategory = category
+                    if (selectedCategory == "Easy to make") {
+
+                    }
                 },
                 label = {
                     Text(
@@ -177,10 +182,12 @@ fun Categories(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun RecipeGrid(modifier: Modifier = Modifier) {
+fun ColumnScope.RecipeGrid() {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
-        modifier = modifier,
+        modifier = Modifier
+            .weight(1f)
+            .padding(horizontal = 16.dp),
     ) {
         items(recipes) { recipe ->
             RecipeCard(recipe)
@@ -192,23 +199,27 @@ fun RecipeGrid(modifier: Modifier = Modifier) {
 fun RecipeCard(recipe: Recipe) {
     Card(
         modifier = Modifier
-            .padding(6.dp),
+            .padding(12.dp),
         shape = RoundedCornerShape(6.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFF292D28)
+            containerColor = Color(0xFF292D28).copy(alpha = 0.5f)
         ),
         border = BorderStroke(2.dp, color = Color(0xFF667A4E))
-
     ) {
-        Spacer(
-            modifier = Modifier.height(140.dp)
-        )
         Column(
             modifier = Modifier
                 .padding(8.dp)
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
+            Image(
+                contentDescription = "",
+                painter = painterResource(recipe.picture),
+                contentScale = ContentScale.Fit,
+                modifier = Modifier
+                    .size(96.dp),
+            )
             Text(
-
                 text = recipe.name,
                 style = MaterialTheme.typography.headlineSmall
             )
@@ -217,16 +228,34 @@ fun RecipeCard(recipe: Recipe) {
                 style = MaterialTheme.typography.headlineSmall
             )
             Text(
-                text = recipe.cookingTime.toString() + " мин.",
+                text = recipe.cookingTime.toString() + " min.",
                 style = MaterialTheme.typography.headlineSmall
             )
         }
-
     }
 }
+
+
 
 @Preview
 @Composable
 private fun RecipeCardPrev() {
-    RecipeGrid()
+    ProjectZomboidCookBookTheme {
+        Column() {
+            RecipeGrid()
+        }
+    }
+}
+
+@Composable
+fun AppBackground(content: @Composable () -> Unit) {
+    Box(modifier = Modifier.fillMaxSize()) {
+        Image(
+            painter = painterResource(R.drawable.main_background),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
+        content()
+    }
 }

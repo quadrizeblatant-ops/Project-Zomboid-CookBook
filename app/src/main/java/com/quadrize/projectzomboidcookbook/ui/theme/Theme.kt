@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -62,7 +63,8 @@ fun ProjectZomboidCookBookTheme(
     }
 
     CompositionLocalProvider(
-        LocalContentColor provides Color.White
+        LocalContentColor provides Color.White,
+        LocalTextStyle provides MaterialTheme.typography.headlineSmall
     ) {
         MaterialTheme(
             colorScheme = colorScheme,

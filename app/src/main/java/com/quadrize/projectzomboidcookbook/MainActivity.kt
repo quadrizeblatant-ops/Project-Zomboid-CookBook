@@ -43,6 +43,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge(
+
             statusBarStyle = SystemBarStyle.dark(
                 android.graphics.Color.BLACK
             ),

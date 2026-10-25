@@ -1,6 +1,7 @@
 package com.quadrize.projectzomboidcookbook.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -20,6 +21,7 @@ val Typography = Typography(
         letterSpacing = 0.5.sp
     ),
     headlineLarge = TextStyle(
+        color = Color(0xFFD5D0B8),
         fontSize = 32.sp,
         fontFamily = FontFamily(
             Font(
@@ -31,6 +33,7 @@ val Typography = Typography(
         )
     ),
     headlineMedium = TextStyle(
+        color = Color(0xFFD5D0B8),
         fontSize = 26.sp,
         fontFamily = FontFamily(
             Font(
@@ -42,6 +45,7 @@ val Typography = Typography(
         )
     ),
     headlineSmall = TextStyle(
+        color = Color(0xFFD5D0B8),
         fontSize = 18.sp,
         fontFamily = FontFamily(
             Font(
