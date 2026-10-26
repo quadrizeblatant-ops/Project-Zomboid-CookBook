@@ -15,12 +15,18 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -70,25 +76,21 @@ fun HomeScreen() {
     val selectedCategory by viewModel.selectedCategory.collectAsStateWithLifecycle()
 
     AppBackground {
-        Scaffold(
-            containerColor = Color.Transparent
-        ) { innerPadding ->
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding)
-            ) {
-                SearchBar(
-                    searchText = searchText,
-                    onSearchTextChange = viewModel::onSearchTextChange
-                )
-                Categories(
-                    selectedCategory = selectedCategory,
-                    onCategoryChange = viewModel::onCategoryChange
-                )
-                RecipeGrid()
-            }
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxSize()
+                .statusBarsPadding()
+        ) {
+            SearchBar(
+                searchText = searchText,
+                onSearchTextChange = viewModel::onSearchTextChange
+            )
+            Categories(
+                selectedCategory = selectedCategory,
+                onCategoryChange = viewModel::onCategoryChange
+            )
+            RecipeGrid()
         }
     }
 }
@@ -198,10 +200,12 @@ fun Categories(
 @Composable
 fun ColumnScope.RecipeGrid() {
     LazyVerticalGrid(
+        contentPadding = WindowInsets.navigationBars.asPaddingValues(),
         columns = GridCells.Fixed(2),
         modifier = Modifier
             .weight(1f)
-            .padding(horizontal = 16.dp),
+            .padding(horizontal = 16.dp)
+        ,
     ) {
         items(recipes) { recipe ->
             RecipeCard(recipe)

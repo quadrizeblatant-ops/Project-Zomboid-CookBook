@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class RecipeViewModel: ViewModel(){
+class RecipeViewModel : ViewModel() {
     private val _searchText = MutableStateFlow("")
     private val _selectedCategory = MutableStateFlow("New")
     val selectedCategory = _selectedCategory.asStateFlow()
