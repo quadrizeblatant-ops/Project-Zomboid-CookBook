@@ -2,7 +2,9 @@ package com.quadrize
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -36,7 +38,7 @@ fun RecipeDetailScreen(recipe: Recipe) {
                 .statusBarsPadding()
         ) {
             RecipeInfo(recipe = recipe)
-            CalGrid()
+            CalGrid(recipe = recipe)
         }
     }
 }
@@ -63,30 +65,65 @@ fun RecipeInfo(recipe: Recipe) {
 }
 
 @Composable
-fun CalGrid() {
-    LazyVerticalGrid(
-        GridCells.Fixed(2),
+fun CalGrid(recipe: Recipe) {
+    val nutritions = listOf(
+        Pair("Калории", recipe.calories),
+        Pair("Белки", recipe.protein),
+        Pair("Жиры", recipe.fats),
+        Pair("Углеводы", recipe.carbs),
+    )
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 8.dp)
     ) {
-        items(recipes) { recipe ->
-            CalCard(recipe = recipe)
+        Text(
+            text = "Пищевая ценность",
+            style = MaterialTheme.typography.headlineMedium
+        )
+        LazyVerticalGrid(
+            GridCells.Fixed(2),
+            modifier = Modifier.padding(top = 8.dp)
+        ) {
+            items(nutritions) { nutrition ->
+                CalCard(
+                    title = nutrition.first,
+                    value = nutrition.second
+                )
+            }
         }
     }
-
 }
+
 @Composable
-fun CalCard(recipe: Recipe) {
+fun CalCard(title: String, value: Int) {
     Card(
         modifier = Modifier
-            .padding(6.dp)
-        ,
+            .padding(6.dp),
         shape = RoundedCornerShape(6.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color(0xFF292D28).copy(alpha = 0.5f)
         ),
         border = BorderStroke(2.dp, color = Color(0xFF667A4E))
     ) {
-        Text(
-            text = recipe.calories.toString()
-        )
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    horizontal = 4.dp,
+                    vertical = 8.dp
+                )
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.headlineSmall
+            )
+            Text(
+                text = value.toString(),
+                style = MaterialTheme.typography.headlineSmall
+            )
+        }
     }
 }
