@@ -1,76 +1,52 @@
 package com.quadrize.projectzomboidcookbook.ui
 
+import android.net.Uri
 import com.quadrize.projectzomboidcookbook.R
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.input.TextFieldState
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.quadrize.projectzomboidcookbook.AppNavigation
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.quadrize.projectzomboidcookbook.Recipe
 import com.quadrize.projectzomboidcookbook.RecipeViewModel
 import com.quadrize.projectzomboidcookbook.recipes
-import com.quadrize.projectzomboidcookbook.ui.theme.ProjectZomboidCookBookTheme
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavController) {
     val viewModel: RecipeViewModel = viewModel()
     val searchText by viewModel.searchText.collectAsStateWithLifecycle()
     val selectedCategory by viewModel.selectedCategory.collectAsStateWithLifecycle()
@@ -90,7 +66,7 @@ fun HomeScreen() {
                 selectedCategory = selectedCategory,
                 onCategoryChange = viewModel::onCategoryChange
             )
-            RecipeGrid()
+            RecipeGrid(navController = navController)
         }
     }
 }
@@ -198,7 +174,7 @@ fun Categories(
 }
 
 @Composable
-fun ColumnScope.RecipeGrid() {
+fun ColumnScope.RecipeGrid(navController: NavController) {
     LazyVerticalGrid(
         contentPadding = WindowInsets.navigationBars.asPaddingValues(),
         columns = GridCells.Fixed(2),
@@ -208,14 +184,20 @@ fun ColumnScope.RecipeGrid() {
         ,
     ) {
         items(recipes) { recipe ->
-            RecipeCard(recipe)
+            RecipeCard(recipe = recipe) {
+                navController.navigate("recipe/${Uri.encode(recipe.name)}")
+            }
         }
     }
 }
 
 @Composable
-fun RecipeCard(recipe: Recipe) {
+fun RecipeCard(
+    recipe: Recipe,
+    onClick: () -> Unit
+) {
     Card(
+        onClick = onClick,
         modifier = Modifier
             .padding(12.dp),
         shape = RoundedCornerShape(6.dp),
@@ -254,15 +236,15 @@ fun RecipeCard(recipe: Recipe) {
 }
 
 
-@Preview
-@Composable
-private fun RecipeCardPrev() {
-    ProjectZomboidCookBookTheme {
-        Column() {
-            RecipeGrid()
-        }
-    }
-}
+//@Preview
+//@Composable
+//private fun RecipeCardPrev() {
+//    ProjectZomboidCookBookTheme {
+//        Column() {
+//            RecipeGrid()
+//        }
+//    }
+//}
 
 @Composable
 fun AppBackground(content: @Composable () -> Unit) {
