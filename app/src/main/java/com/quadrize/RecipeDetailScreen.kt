@@ -16,6 +16,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import com.quadrize.projectzomboidcookbook.Recipe
 import com.quadrize.projectzomboidcookbook.recipes
 import com.quadrize.projectzomboidcookbook.ui.AppBackground
+import java.nio.file.WatchEvent
 
 @Composable
 fun RecipeDetailScreen(recipe: Recipe) {
@@ -61,6 +63,15 @@ fun RecipeInfo(recipe: Recipe) {
             style = MaterialTheme.typography.headlineSmall,
             text = recipe.description
         )
+        HorizontalDivider(
+            thickness = 1.5.dp,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 6.dp, vertical = 16.dp)
+                ,
+            color = Color(0xFF667A4E)
+        )
+
     }
 }
 
@@ -76,7 +87,6 @@ fun CalGrid(recipe: Recipe) {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 8.dp)
     ) {
         Text(
             text = "Пищевая ценность",

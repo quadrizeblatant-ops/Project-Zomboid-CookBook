@@ -11,7 +11,6 @@ data class Recipe(
     val protein: Int,
     val fats: Int,
     val carbs: Int
-
 ) {
 }
 
