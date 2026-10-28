@@ -55,7 +55,21 @@ val Typography = Typography(
                 )
             )
         )
+    ),
+
+    displaySmall = TextStyle(
+        color = Color(0xFFD5D0B8),
+        fontSize = 16.sp,
+        fontFamily = FontFamily(
+            Font(
+                resId = R.font.montserrat_font,
+                variationSettings = androidx.compose.ui.text.font.FontVariation.Settings(
+                    androidx.compose.ui.text.font.FontVariation.Setting("wght", 400F)
+                )
+            )
+        )
     )
+
 
 
     /* Other default text styles to override

@@ -40,6 +40,7 @@ fun RecipeDetailScreen(recipe: Recipe) {
                 .statusBarsPadding()
         ) {
             RecipeInfo(recipe = recipe)
+            InfoCardGrid(recipe = recipe)
             CalGrid(recipe = recipe)
         }
     }
@@ -67,8 +68,7 @@ fun RecipeInfo(recipe: Recipe) {
             thickness = 1.5.dp,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 6.dp, vertical = 16.dp)
-                ,
+                .padding(horizontal = 6.dp, vertical = 16.dp),
             color = Color(0xFF667A4E)
         )
 
@@ -118,20 +118,78 @@ fun CalCard(title: String, value: Int) {
         border = BorderStroke(2.dp, color = Color(0xFF667A4E))
     ) {
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
+            horizontalAlignment = Alignment.Start,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    horizontal = 4.dp,
+                    horizontal = 8.dp,
                     vertical = 8.dp
                 )
         ) {
             Text(
                 text = title,
-                style = MaterialTheme.typography.headlineSmall
+                style = MaterialTheme.typography.displaySmall
             )
             Text(
                 text = value.toString(),
+                style = MaterialTheme.typography.headlineSmall
+            )
+        }
+    }
+}
+
+@Composable
+fun InfoCardGrid(recipe: Recipe) {
+    val info = listOf(
+        Pair("Время", recipe.cookingTime),
+        Pair("Сложность", recipe.difficulty),
+        Pair("Кулинария", recipe.level)
+    )
+    LazyVerticalGrid(
+        GridCells.Fixed(3)
+    ) {
+        items(info) { info ->
+            InfoCard(
+                title = info.first,
+                value = info.second.toString()
+            )
+        }
+    }
+    HorizontalDivider(
+        thickness = 1.5.dp,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 10.dp, vertical = 16.dp),
+        color = Color(0xFF667A4E)
+    )
+}
+
+@Composable
+fun InfoCard(title: String, value: String) {
+    Card(
+        shape = RoundedCornerShape(6.dp),
+        modifier = Modifier
+            .padding(10.dp)
+        ,
+        colors = CardDefaults.cardColors(
+            containerColor = Color(0xFF292D28).copy(alpha = 0.8f)
+        )
+    ) {
+        Column(
+            horizontalAlignment = Alignment.Start,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    horizontal = 8.dp,
+                    vertical = 8.dp
+                )
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.displaySmall
+            )
+            Text(
+                text = value,
                 style = MaterialTheme.typography.headlineSmall
             )
         }
