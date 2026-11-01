@@ -1,10 +1,12 @@
-package com.quadrize.projectzomboidcookbook
+package com.quadrize.appNav
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.quadrize.RecipeDetailScreen
+import com.quadrize.recipe.RecipeDetailScreen
+import com.quadrize.projectzomboidcookbook.WelcomeScreen
+import com.quadrize.recipe.recipes
 import com.quadrize.projectzomboidcookbook.ui.HomeScreen
 
 @Composable

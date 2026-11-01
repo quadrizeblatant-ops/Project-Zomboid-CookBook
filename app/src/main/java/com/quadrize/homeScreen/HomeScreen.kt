@@ -41,9 +41,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.quadrize.projectzomboidcookbook.Recipe
-import com.quadrize.projectzomboidcookbook.RecipeViewModel
-import com.quadrize.projectzomboidcookbook.recipes
+import com.quadrize.recipe.Recipe
+import com.quadrize.recipe.RecipeViewModel
+import com.quadrize.recipe.recipes
 
 @Composable
 fun HomeScreen(navController: NavController) {

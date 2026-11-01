@@ -1,10 +1,8 @@
-package com.quadrize
+package com.quadrize.recipe
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -25,10 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.quadrize.projectzomboidcookbook.Recipe
-import com.quadrize.projectzomboidcookbook.recipes
 import com.quadrize.projectzomboidcookbook.ui.AppBackground
-import java.nio.file.WatchEvent
 
 @Composable
 fun RecipeDetailScreen(recipe: Recipe) {

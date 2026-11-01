@@ -1,4 +1,4 @@
-package com.quadrize.projectzomboidcookbook
+package com.quadrize.recipe
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

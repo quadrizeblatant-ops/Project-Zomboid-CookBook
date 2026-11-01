@@ -1,4 +1,6 @@
-package com.quadrize.projectzomboidcookbook
+package com.quadrize.recipe
+
+import com.quadrize.projectzomboidcookbook.R
 
 
 data class Recipe(
