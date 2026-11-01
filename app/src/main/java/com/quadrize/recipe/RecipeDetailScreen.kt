@@ -3,6 +3,7 @@ package com.quadrize.recipe
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -22,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.quadrize.projectzomboidcookbook.ui.AppBackground
 
@@ -37,6 +39,7 @@ fun RecipeDetailScreen(recipe: Recipe) {
             RecipeInfo(recipe = recipe)
             InfoCardGrid(recipe = recipe)
             CalGrid(recipe = recipe)
+            IngredientsCard(recipe = recipe)
         }
     }
 }
@@ -189,4 +192,27 @@ fun InfoCard(title: String, value: String) {
             )
         }
     }
+}
+
+@Composable
+fun IngredientsCard(recipe: Recipe) {
+    Column(
+        horizontalAlignment = Alignment.Start,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 6.dp)
+    ) {
+        Text(
+            style = MaterialTheme.typography.headlineMedium,
+            text = "Вам понадобится:",
+            modifier = Modifier
+                .padding(vertical = 12.dp)
+        )
+        Text(
+            text = recipe.ingredients,
+            style = MaterialTheme.typography.displaySmall
+        )
+    }
+
+
 }
