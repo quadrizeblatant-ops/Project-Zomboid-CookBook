@@ -66,7 +66,9 @@ fun HomeScreen(navController: NavController) {
                 selectedCategory = selectedCategory,
                 onCategoryChange = viewModel::onCategoryChange
             )
-            RecipeGrid(navController = navController)
+            RecipeGrid(navController = navController,
+                recipes = viewModel.getFilteredRecipes(selectedCategory)
+                )
         }
     }
 }
@@ -130,7 +132,7 @@ fun Categories(
     onCategoryChange: (String) -> Unit
 ) {
     val categories = listOf(
-        "New",
+        "All",
         "Popular",
         "Easy to make",
         "Complicated",
@@ -174,7 +176,7 @@ fun Categories(
 }
 
 @Composable
-fun ColumnScope.RecipeGrid(navController: NavController) {
+fun ColumnScope.RecipeGrid(navController: NavController, recipes: List<Recipe>) {
     LazyVerticalGrid(
         contentPadding = WindowInsets.navigationBars.asPaddingValues(),
         columns = GridCells.Fixed(2),
