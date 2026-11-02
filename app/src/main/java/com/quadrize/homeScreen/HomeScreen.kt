@@ -4,6 +4,7 @@ import android.net.Uri
 import com.quadrize.projectzomboidcookbook.R
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -37,6 +38,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -50,7 +52,7 @@ fun HomeScreen(navController: NavController) {
     val searchText by viewModel.searchText.collectAsStateWithLifecycle()
     val selectedCategory by viewModel.selectedCategory.collectAsStateWithLifecycle()
 
-    AppBackground {
+    AppBackgroundGradient {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
@@ -250,12 +252,49 @@ fun RecipeCard(
 @Composable
 fun AppBackground(content: @Composable () -> Unit) {
     Box(modifier = Modifier.fillMaxSize()) {
+//        Image(
+//            painter = painterResource(R.drawable.main_background),
+//            contentDescription = null,
+//            contentScale = ContentScale.Crop,
+//            modifier = Modifier.fillMaxSize()
+//        )
+        content()
+    }
+}
+
+@Composable
+fun AppBackgroundGradient(content: @Composable () -> Unit) {
+    // 1. Создаем палитру на основе ваших цветов, уходящую в глубокую тень
+    val gradientColors = listOf(
+        Color(0xFF1B2016), // Темно-болотный (глубокий оттенок вашего #667A4E)
+        Color(0xFF131512), // Очень темный серо-зеленый (база от #292D28)
+        Color(0xFF0B0C0A)  // Практически черный в самом низу для объема
+    )
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            // 2. Применяем вертикальный градиент
+            .background(
+                brush = Brush.verticalGradient(colors = gradientColors)
+            )
+    ) {
+        /*
+        3. Опционально: Эффект шума/текстуры.
+        Если у вас есть или вы добавите в проект мелкую бесшовную текстуру шума (например, noise.png),
+        вы можете раскомментировать этот блок. Он наложит легкий винтажный фильтр поверх градиента.
+
         Image(
-            painter = painterResource(R.drawable.main_background),
+            painter = painterResource(id = com.quadrize.recipe.R.drawable.noise),
             contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
+                .alpha(0.04f), // Минимальная прозрачность, чтобы шум едва угадывался
+            contentScale = ContentScale.Crop
         )
+        */
+
+        // Контент вашего экрана (в данном случае RecipeDetailScreen)
         content()
     }
 }

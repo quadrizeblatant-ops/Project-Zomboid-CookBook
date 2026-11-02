@@ -5,8 +5,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -29,11 +32,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.quadrize.homeScreen.AppBackground
+import com.quadrize.homeScreen.AppBackgroundGradient
 
 @Composable
 fun RecipeDetailScreen(recipe: Recipe) {
-    AppBackground {
+    AppBackgroundGradient {
         LazyColumn(
+            contentPadding = WindowInsets.navigationBars.asPaddingValues(),
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
@@ -127,6 +132,14 @@ fun CalGrid(recipe: Recipe) {
             }
         }
     }
+
+    HorizontalDivider(
+        thickness = 1.5.dp,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 6.dp, vertical = 16.dp),
+        color = Color(0xFF667A4E)
+    )
 }
 
 @Composable
@@ -191,7 +204,6 @@ fun InfoCardGrid(recipe: Recipe) {
                 InfoCard(title = "Кулинария", value = recipe.level.toString())
             }
         }
-
         HorizontalDivider(
             thickness = 1.5.dp,
             modifier = Modifier
