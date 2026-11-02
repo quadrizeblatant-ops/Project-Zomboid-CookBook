@@ -7,7 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import com.quadrize.recipe.RecipeDetailScreen
 import com.quadrize.projectzomboidcookbook.WelcomeScreen
 import com.quadrize.recipe.recipes
-import com.quadrize.projectzomboidcookbook.ui.HomeScreen
+import com.quadrize.homeScreen.HomeScreen
 
 @Composable
 fun AppNavigation() {

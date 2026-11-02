@@ -1,4 +1,4 @@
-package com.quadrize.projectzomboidcookbook.ui
+package com.quadrize.homeScreen
 
 import android.net.Uri
 import com.quadrize.projectzomboidcookbook.R
@@ -43,7 +43,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.quadrize.recipe.Recipe
 import com.quadrize.recipe.RecipeViewModel
-import com.quadrize.recipe.recipes
 
 @Composable
 fun HomeScreen(navController: NavController) {
