@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -32,16 +33,16 @@ import com.quadrize.homeScreen.AppBackground
 @Composable
 fun RecipeDetailScreen(recipe: Recipe) {
     AppBackground {
-        Column(
+        LazyColumn(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
                 .statusBarsPadding()
         ) {
-            RecipeInfo(recipe = recipe)
-            InfoCardGrid(recipe = recipe)
-            CalGrid(recipe = recipe)
-            IngredientsCard(recipe = recipe)
+            item { RecipeInfo(recipe = recipe) }
+            item { InfoCardGrid(recipe = recipe) }
+            item { CalGrid(recipe = recipe) }
+            item { IngredientsCard(recipe = recipe) }
         }
     }
 }
@@ -77,30 +78,52 @@ fun RecipeInfo(recipe: Recipe) {
 
 @Composable
 fun CalGrid(recipe: Recipe) {
-    val nutritions = listOf(
-        Pair("Калории", recipe.calories),
-        Pair("Белки", recipe.protein),
-        Pair("Жиры", recipe.fats),
-        Pair("Углеводы", recipe.carbs),
-    )
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.Start,
         modifier = Modifier
             .fillMaxWidth()
+            .padding(horizontal = 4.dp)
     ) {
         Text(
-            text = "Пищевая ценность",
-            style = MaterialTheme.typography.headlineMedium
+            text = "Пищевая ценность:",
+            style = MaterialTheme.typography.headlineMedium,
+            modifier = Modifier
+                .padding(bottom = 8.dp)
+                .padding(horizontal = 6.dp)
         )
-        LazyVerticalGrid(
-            GridCells.Fixed(2),
-            modifier = Modifier.padding(top = 8.dp)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
         ) {
-            items(nutritions) { nutrition ->
-                CalCard(
-                    title = nutrition.first,
-                    value = nutrition.second
-                )
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+            ) {
+                CalCard(title = "Калории", value = recipe.calories)
+            }
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+            ) {
+                CalCard(title = "Белки", value = recipe.protein)
+            }
+        }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+            ) {
+                CalCard(title = "Жиры", value = recipe.fats)
+            }
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+            ) {
+                CalCard(title = "Углеводы", value = recipe.carbs)
             }
         }
     }
@@ -140,28 +163,43 @@ fun CalCard(title: String, value: Int) {
 
 @Composable
 fun InfoCardGrid(recipe: Recipe) {
-    val info = listOf(
-        Pair("Время", recipe.cookingTime),
-        Pair("Сложность", recipe.difficulty),
-        Pair("Кулинария", recipe.level)
-    )
-    LazyVerticalGrid(
-        GridCells.Fixed(3)
-    ) {
-        items(info) { info ->
-            InfoCard(
-                title = info.first,
-                value = info.second.toString()
-            )
-        }
-    }
-    HorizontalDivider(
-        thickness = 1.5.dp,
+    Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 10.dp, vertical = 16.dp),
-        color = Color(0xFF667A4E)
-    )
+            .padding(horizontal = 4.dp) // Небольшой отступ по бокам для всей группы
+    ) {
+        // Обычный Row вместо LazyVerticalGrid
+        Row(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+            ) {
+                InfoCard(title = "Время", value = recipe.cookingTime.toString())
+            }
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+            ) {
+                InfoCard(title = "Сложность", value = recipe.difficulty.toString())
+            }
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+            ) {
+                InfoCard(title = "Кулинария", value = recipe.level.toString())
+            }
+        }
+
+        HorizontalDivider(
+            thickness = 1.5.dp,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 6.dp, vertical = 16.dp),
+            color = Color(0xFF667A4E)
+        )
+    }
 }
 
 @Composable
@@ -169,8 +207,7 @@ fun InfoCard(title: String, value: String) {
     Card(
         shape = RoundedCornerShape(6.dp),
         modifier = Modifier
-            .padding(10.dp)
-        ,
+            .padding(10.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color(0xFF292D28).copy(alpha = 0.8f)
         )
