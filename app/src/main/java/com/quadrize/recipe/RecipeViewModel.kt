@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.asStateFlow
 
 class RecipeViewModel : ViewModel() {
     private val _searchText = MutableStateFlow("")
-    private val _selectedCategory = MutableStateFlow("New")
+    private val _selectedCategory = MutableStateFlow("All")
     val selectedCategory = _selectedCategory.asStateFlow()
     val searchText = _searchText.asStateFlow()
 

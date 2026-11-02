@@ -2,7 +2,6 @@ package com.quadrize.recipe
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
@@ -14,12 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
@@ -31,7 +25,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.quadrize.homeScreen.AppBackground
 import com.quadrize.homeScreen.AppBackgroundGradient
 
 @Composable
@@ -179,9 +172,8 @@ fun InfoCardGrid(recipe: Recipe) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 4.dp) // Небольшой отступ по бокам для всей группы
+            .padding(horizontal = 4.dp)
     ) {
-        // Обычный Row вместо LazyVerticalGrid
         Row(
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -195,13 +187,13 @@ fun InfoCardGrid(recipe: Recipe) {
                 modifier = Modifier
                     .weight(1f)
             ) {
-                InfoCard(title = "Сложность", value = recipe.difficulty.toString())
+                InfoCard(title = "Сложность", value = recipe.difficulty)
             }
             Column(
                 modifier = Modifier
                     .weight(1f)
             ) {
-                InfoCard(title = "Кулинария", value = recipe.level.toString())
+                InfoCard(title = "Кулинария", value = recipe.level)
             }
         }
         HorizontalDivider(

@@ -1,7 +1,6 @@
 package com.quadrize.homeScreen
 
 import android.net.Uri
-import com.quadrize.projectzomboidcookbook.R
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -67,9 +66,10 @@ fun HomeScreen(navController: NavController) {
                 selectedCategory = selectedCategory,
                 onCategoryChange = viewModel::onCategoryChange
             )
-            RecipeGrid(navController = navController,
+            RecipeGrid(
+                navController = navController,
                 recipes = viewModel.getFilteredRecipes(selectedCategory)
-                )
+            )
         }
     }
 }
@@ -114,20 +114,6 @@ fun SearchBar(
 }
 
 @Composable
-fun TestFilterChip() {
-    val testCategories = listOf(
-        "Test 1",
-        "Test 2",
-        "Test 3"
-    )
-    val selectedCategory by remember {
-        mutableStateOf("Test 1")
-    }
-    LazyRow() {
-    }
-}
-
-@Composable
 fun Categories(
     selectedCategory: String,
     onCategoryChange: (String) -> Unit
@@ -149,8 +135,6 @@ fun Categories(
                 selected = selectedCategory == category,
                 onClick = {
                     onCategoryChange(category)
-                    if (category == "Easy to Make") {
-                    }
                 },
                 label = {
                     Text(
@@ -183,8 +167,7 @@ fun ColumnScope.RecipeGrid(navController: NavController, recipes: List<Recipe>) 
         columns = GridCells.Fixed(2),
         modifier = Modifier
             .weight(1f)
-            .padding(horizontal = 16.dp)
-        ,
+            .padding(horizontal = 16.dp),
     ) {
         items(recipes) { recipe ->
             RecipeCard(recipe = recipe) {
