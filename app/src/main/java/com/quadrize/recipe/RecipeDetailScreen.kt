@@ -64,10 +64,10 @@ fun RecipeInfo(recipe: Recipe) {
         )
         Text(
             text = recipe.name,
-            style = MaterialTheme.typography.headlineMedium
+            style = MaterialTheme.typography.titleLarge
         )
         Text(
-            style = MaterialTheme.typography.headlineSmall,
+            style = MaterialTheme.typography.bodySmall,
             text = recipe.description
         )
         HorizontalDivider(
@@ -91,7 +91,7 @@ fun CalGrid(recipe: Recipe) {
     ) {
         Text(
             text = "Пищевая ценность:",
-            style = MaterialTheme.typography.headlineMedium,
+            style = MaterialTheme.typography.titleLarge,
             modifier = Modifier
                 .padding(bottom = 8.dp)
                 .padding(horizontal = 6.dp)
@@ -164,7 +164,7 @@ fun CalCard(title: String, value: Int) {
         ) {
             Text(
                 text = title,
-                style = MaterialTheme.typography.displaySmall
+                style = MaterialTheme.typography.titleSmall
             )
             Text(
                 text = value.toString(),
@@ -235,7 +235,7 @@ fun InfoCard(title: String, value: String) {
         ) {
             Text(
                 text = title,
-                style = MaterialTheme.typography.displaySmall
+                style = MaterialTheme.typography.titleSmall
             )
             Text(
                 text = value,
@@ -260,16 +260,15 @@ fun IngredientsCard(recipe: Recipe) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 6.dp)
+                .padding(vertical = 12.dp)
         ) {
             Text(
-                style = MaterialTheme.typography.headlineMedium,
-                text = "Вам понадобится:",
-                modifier = Modifier
-                    .padding(vertical = 12.dp)
+                style = MaterialTheme.typography.titleLarge,
+                text = "Вам понадобится:"
             )
             Text(
                 text = recipe.ingredients,
-                style = MaterialTheme.typography.displaySmall
+                style = MaterialTheme.typography.bodySmall
             )
         }
     }
