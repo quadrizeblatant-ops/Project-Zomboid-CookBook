@@ -222,62 +222,21 @@ fun RecipeCard(
 }
 
 
-//@Preview
-//@Composable
-//private fun RecipeCardPrev() {
-//    ProjectZomboidCookBookTheme {
-//        Column() {
-//            RecipeGrid()
-//        }
-//    }
-//}
-
-@Composable
-fun AppBackground(content: @Composable () -> Unit) {
-    Box(modifier = Modifier.fillMaxSize()) {
-//        Image(
-//            painter = painterResource(R.drawable.main_background),
-//            contentDescription = null,
-//            contentScale = ContentScale.Crop,
-//            modifier = Modifier.fillMaxSize()
-//        )
-        content()
-    }
-}
-
 @Composable
 fun AppBackgroundGradient(content: @Composable () -> Unit) {
-    // 1. Создаем палитру на основе ваших цветов, уходящую в глубокую тень
     val gradientColors = listOf(
-        Color(0xFF1B2016), // Темно-болотный (глубокий оттенок вашего #667A4E)
-        Color(0xFF131512), // Очень темный серо-зеленый (база от #292D28)
-        Color(0xFF0B0C0A)  // Практически черный в самом низу для объема
+        Color(0xFF1B2016),
+        Color(0xFF131512),
+        Color(0xFF0B0C0A)
     )
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            // 2. Применяем вертикальный градиент
             .background(
                 brush = Brush.verticalGradient(colors = gradientColors)
             )
     ) {
-        /*
-        3. Опционально: Эффект шума/текстуры.
-        Если у вас есть или вы добавите в проект мелкую бесшовную текстуру шума (например, noise.png),
-        вы можете раскомментировать этот блок. Он наложит легкий винтажный фильтр поверх градиента.
-
-        Image(
-            painter = painterResource(id = com.quadrize.recipe.R.drawable.noise),
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxSize()
-                .alpha(0.04f), // Минимальная прозрачность, чтобы шум едва угадывался
-            contentScale = ContentScale.Crop
-        )
-        */
-
-        // Контент вашего экрана (в данном случае RecipeDetailScreen)
         content()
     }
 }
