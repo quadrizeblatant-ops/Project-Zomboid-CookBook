@@ -41,7 +41,8 @@ import com.quadrize.homeScreen.AppBackgroundGradient
 @Composable
 fun RecipeDetailScreen(recipe: Recipe) {
     val context = LocalContext.current
-    var showRateDialog by remember { mutableStateOf(checkAndMarkFirstRecipeClick(context)) }
+    // Теперь контекст не нужен для SharedPreferences
+    var showRateDialog by remember { mutableStateOf(checkAndMarkFirstRecipeClick()) }
 
     if (showRateDialog) {
         RateAppDialog(
@@ -52,7 +53,6 @@ fun RecipeDetailScreen(recipe: Recipe) {
             }
         )
     }
-
     AppBackgroundGradient {
         LazyColumn(
             contentPadding = WindowInsets.navigationBars.asPaddingValues(),
@@ -69,11 +69,20 @@ fun RecipeDetailScreen(recipe: Recipe) {
     }
 }
 
-private fun checkAndMarkFirstRecipeClick(context: Context): Boolean {
-    val prefs = context.getSharedPreferences("app_settings", Context.MODE_PRIVATE)
-    val hasShownDialog = prefs.getBoolean("has_shown_rate_dialog", false)
-    if (!hasShownDialog) {
-        prefs.edit().putBoolean("has_shown_rate_dialog", true).apply()
+//private fun checkAndMarkFirstRecipeClick(context: Context): Boolean {
+//    val prefs = context.getSharedPreferences("app_settings", Context.MODE_PRIVATE)
+//    val hasShownDialog = prefs.getBoolean("has_shown_rate_dialog", false)
+//    if (!hasShownDialog) {
+//        prefs.edit().putBoolean("has_shown_rate_dialog", true).apply()
+//        return true
+//    }
+//    return false
+//}
+private var hasShownInThisSession = false
+
+private fun checkAndMarkFirstRecipeClick(): Boolean {
+    if (!hasShownInThisSession) {
+        hasShownInThisSession = true
         return true
     }
     return false
@@ -87,7 +96,7 @@ private fun openPlayStore(context: Context) {
     }
     try {
         context.startActivity(goToMarket)
-    } catch (_: ActivityNotFoundException) {
+    } catch (e: ActivityNotFoundException) {
         context.startActivity(
             Intent(
                 Intent.ACTION_VIEW,
