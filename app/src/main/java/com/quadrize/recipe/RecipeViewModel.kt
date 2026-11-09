@@ -19,11 +19,11 @@ class RecipeViewModel : ViewModel() {
     }
 
     fun getSearchResults(text: String): List<Recipe> {
-        return when (text) {
-            text -> recipes.filter { it.name.contains(text, ignoreCase = true) }
-            else -> recipes
+        return recipes.filter {
+            it.name.contains(text, ignoreCase = true)
         }
     }
+
 
     fun getFilteredRecipes(category: String): List<Recipe> {
         return when (category) {
@@ -33,5 +33,11 @@ class RecipeViewModel : ViewModel() {
             "Low level" -> recipes.filter { it.level == "0 Уровень" }
             else -> recipes
         }
+    }
+    fun getRecipes(text: String, category: String): List<Recipe> {
+        val searchResults = getSearchResults(text)
+        val categoryResults = getFilteredRecipes(category)
+
+        return searchResults.filter { it in categoryResults }
     }
 }
