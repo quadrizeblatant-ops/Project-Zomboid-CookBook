@@ -38,8 +38,7 @@ class MainActivity : ComponentActivity() {
 
             statusBarStyle = SystemBarStyle.dark(
                 android.graphics.Color.TRANSPARENT
-            )
-            ,
+            ),
             navigationBarStyle = SystemBarStyle.dark(
                 android.graphics.Color.TRANSPARENT
             )
@@ -109,23 +108,19 @@ fun ColumnScope.StartBackgroundImage() {
 fun WelcomeScreen(
     onStartClick: () -> Unit
 ) {
-//    Scaffold { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding()
-                .background(Color.Black)
-                .systemBarsPadding()
-            ,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            StartBackgroundImage()
-            AppHeader()
-            StartButton(onStartClick)
-        }
-//    }
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding()
+            .background(Color.Black)
+            .systemBarsPadding(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        StartBackgroundImage()
+        AppHeader()
+        StartButton(onStartClick)
+    }
 }
-
 
 
 @Composable

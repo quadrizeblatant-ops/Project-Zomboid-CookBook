@@ -69,15 +69,6 @@ fun RecipeDetailScreen(recipe: Recipe) {
     }
 }
 
-//private fun checkAndMarkFirstRecipeClick(context: Context): Boolean {
-//    val prefs = context.getSharedPreferences("app_settings", Context.MODE_PRIVATE)
-//    val hasShownDialog = prefs.getBoolean("has_shown_rate_dialog", false)
-//    if (!hasShownDialog) {
-//        prefs.edit().putBoolean("has_shown_rate_dialog", true).apply()
-//        return true
-//    }
-//    return false
-//}
 private var hasShownInThisSession = false
 
 private fun checkAndMarkFirstRecipeClick(): Boolean {

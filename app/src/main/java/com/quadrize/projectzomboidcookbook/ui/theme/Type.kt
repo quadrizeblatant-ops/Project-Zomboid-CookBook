@@ -19,11 +19,8 @@ val Typography = Typography(
         fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
-    ),
-    headlineLarge = TextStyle(
-        color = Color(0xFFD5D0B8),
-        fontSize = 32.sp,
-        fontFamily = FontFamily(
+    ), headlineLarge = TextStyle(
+        color = Color(0xFFD5D0B8), fontSize = 32.sp, fontFamily = FontFamily(
             Font(
                 resId = R.font.montserrat_font,
                 variationSettings = androidx.compose.ui.text.font.FontVariation.Settings(
@@ -31,11 +28,8 @@ val Typography = Typography(
                 )
             )
         )
-    ),
-    headlineMedium = TextStyle(
-        color = Color(0xFF667A4E),
-        fontSize = 26.sp,
-        fontFamily = FontFamily(
+    ), headlineMedium = TextStyle(
+        color = Color(0xFF667A4E), fontSize = 26.sp, fontFamily = FontFamily(
             Font(
                 resId = R.font.montserrat_font,
                 variationSettings = androidx.compose.ui.text.font.FontVariation.Settings(
@@ -43,11 +37,8 @@ val Typography = Typography(
                 )
             )
         )
-    ),
-    titleLarge = TextStyle(
-        color = Color(0xFF87A96B),
-        fontSize = 26.sp,
-        fontFamily = FontFamily(
+    ), titleLarge = TextStyle(
+        color = Color(0xFF87A96B), fontSize = 26.sp, fontFamily = FontFamily(
             Font(
                 resId = R.font.montserrat_font,
                 variationSettings = androidx.compose.ui.text.font.FontVariation.Settings(
@@ -55,11 +46,8 @@ val Typography = Typography(
                 )
             )
         )
-    ),
-    titleSmall = TextStyle(
-        color = Color(0xFFE1E4DC),
-        fontSize = 16.sp,
-        fontFamily = FontFamily(
+    ), titleSmall = TextStyle(
+        color = Color(0xFFE1E4DC), fontSize = 16.sp, fontFamily = FontFamily(
             Font(
                 resId = R.font.montserrat_font,
                 variationSettings = androidx.compose.ui.text.font.FontVariation.Settings(
@@ -67,11 +55,8 @@ val Typography = Typography(
                 )
             )
         )
-    ),
-    headlineSmall = TextStyle(
-        color = Color(0xFFD5D0B8),
-        fontSize = 20.sp,
-        fontFamily = FontFamily(
+    ), headlineSmall = TextStyle(
+        color = Color(0xFFD5D0B8), fontSize = 20.sp, fontFamily = FontFamily(
             Font(
                 resId = R.font.montserrat_font,
                 variationSettings = androidx.compose.ui.text.font.FontVariation.Settings(
@@ -82,9 +67,7 @@ val Typography = Typography(
     ),
 
     bodySmall = TextStyle(
-        color = Color(0xFFE1E4DC),
-        fontSize = 18.sp,
-        fontFamily = FontFamily(
+        color = Color(0xFFE1E4DC), fontSize = 18.sp, fontFamily = FontFamily(
             Font(
                 resId = R.font.montserrat_font,
                 variationSettings = androidx.compose.ui.text.font.FontVariation.Settings(
@@ -93,7 +76,6 @@ val Typography = Typography(
             )
         )
     )
-
 
 
     /* Other default text styles to override
