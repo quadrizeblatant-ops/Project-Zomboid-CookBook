@@ -60,7 +60,9 @@ fun HomeScreen(navController: NavController) {
         ) {
             SearchBar(
                 searchText = searchText,
-                onSearchTextChange = viewModel::onSearchTextChange
+                onSearchTextChange = viewModel::onSearchTextChange,
+                recipes = viewModel.getSearchResults(searchText)
+
             )
             Categories(
                 selectedCategory = selectedCategory,
@@ -78,7 +80,8 @@ fun HomeScreen(navController: NavController) {
 @Composable
 fun SearchBar(
     searchText: String,
-    onSearchTextChange: (String) -> Unit
+    onSearchTextChange: (String) -> Unit,
+    recipes: List<Recipe>,
 ) {
     Column(
         horizontalAlignment = Alignment.Start

@@ -18,6 +18,13 @@ class RecipeViewModel : ViewModel() {
         _selectedCategory.value = category
     }
 
+    fun getSearchResults(text: String): List<Recipe> {
+        return when(text) {
+            text -> recipes.filter { it.name == text }
+            else -> recipes
+        }
+    }
+
     fun getFilteredRecipes(category: String): List<Recipe> {
         return when (category) {
             "Popular" -> recipes.filter { it.name == "Burger" }
