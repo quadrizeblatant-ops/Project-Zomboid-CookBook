@@ -5,12 +5,12 @@
     <td align="center" width="50%">
       <h3>🚀 Onboarding Screen</h3>
       <p>First base iteration of the welcome screen featuring custom artwork and a quick-start button.</p>
-      <img src="https://github.com" alt="Onboarding Screen" width="250" />
+      <img src="[https://github.com](https://github.com/quadrizeblatant-ops/Project-Zomboid-CookBook/blob/master/images/pz1.png?raw=true)" alt="Onboarding Screen" width="250" />
     </td>
     <td align="center" width="50%">
       <h3>🍳 Main Screen</h3>
       <p>Main catalog with a real-time search bar, category chips, and recipe cards with cooking times.</p>
-      <img src="https://github.com" alt="Main Screen" width="250" />
+      <img src="[https://github.com](https://github.com/quadrizeblatant-ops/Project-Zomboid-CookBook/blob/master/images/pz2.png?raw=true)" alt="Main Screen" width="250" />
     </td>
   </tr>
   <tr>
